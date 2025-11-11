@@ -1,0 +1,11 @@
+terraform init      # Initialize providers
+terraform plan      # Preview changes
+terraform apply     # Create resources
+terraform show      # View current state
+terraform destroy   # Delete resources
+terraform state list
+terraform state show aws_instance.web
+terraform state pull
+terraform state push
+terraform state rm aws_instance.web
+terraform state mv aws_instance.web aws_instance.new
