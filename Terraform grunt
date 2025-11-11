@@ -1,0 +1,28 @@
+What is Terragrunt?
+Terragrunt is a thin wrapper for Terraform that provides extra tools for keeping configurations DRY.
+
+Installation:
+brew install terragrunt
+
+# Or download binary
+wget https://github.com/gruntwork-io/terragrunt/releases/download/v0.50.0/terragrunt_linux_amd64
+chmod +x terragrunt_linux_amd64
+sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
+Example Configuration:
+terraform {
+  source = "git::git@github.com:your-org/modules.git//ec2"
+}
+
+remote_state {
+  backend = "s3"
+  config = {
+    bucket = "my-terraform-state"
+    key    = "terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
+inputs = {
+  instance_type = "t2.micro"
+  environment   = "production"
+}
