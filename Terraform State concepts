@@ -1,0 +1,52 @@
+What is terraform.tfstate?
+
+A JSON file that maps your Terraform configuration to real-world resources. It is the source of truth for Terraform.
+
+Why State File is Important:
+Resource Tracking: Maps config to real resources
+Performance: Caches resource attributes
+Metadata: Stores resource dependencies
+Collaboration: Shared state for team workflows
+Setting Up Remote State:
+terraform {
+  backend "s3" {
+    bucket         = "my-terraform-state-bucket"
+    key            = "prod/terraform.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+    dynamodb_table = "terraform-state-lock"
+  }
+}
+State Commands:
+terraform state list
+terraform state show aws_instance.web
+terraform state pull
+terraform state push
+terraform state rm aws_instance.web
+terraform state mv aws_instance.web aws_instance.new
+
+
+What Happens if State File is Deleted?
+Consequences:
+
+Terraform loses track of all resources
+Running terraform plan shows all resources as to be created
+Running terraform apply will try to recreate everything
+You lose all metadata and dependencies
+Recovery Method 1: Restore from Backup
+cp terraform.tfstate.backup terraform.tfstate
+terraform plan
+Recovery Method 2: Import Resources
+terraform import aws_instance.web i-1234567890abcdef0
+terraform import aws_s3_bucket.my_bucket my-bucket-name
+Recovery Method 3: Remote State with Versioning
+aws s3api list-object-versions \
+  --bucket my-terraform-state-bucket \
+  --prefix prod/terraform.tfstate
+Best Practices
+Always use remote state for production
+Enable versioning on S3 bucket
+Enable encryption at rest
+Use state locking with DynamoDB
+Never edit state file manually
+Never commit state file to Git
