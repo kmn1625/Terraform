@@ -1,0 +1,39 @@
+Q1: What is Terraform and why use it?
+
+A: Terraform is an IaC tool for infrastructure provisioning. Benefits include version control, multi-cloud support, and automation.
+
+Q2: Explain Terraform state file
+
+A: State file maps Terraform configuration to real resources. It tracks metadata, dependencies, and improves performance.
+
+Q3: What happens if state file is lost?
+
+A: Terraform loses resource tracking. Solutions: restore from backup, import resources, or recover from remote state.
+
+Q4: Difference between plan and apply?
+
+A: Plan shows what changes will be made (dry run). Apply actually creates/modifies/destroys resources.
+
+Q5: What is infrastructure drift?
+
+A: Drift is when actual infrastructure differs from state file due to manual changes. Detect using terraform plan or refresh.
+
+Q6: Explain provisioners
+
+A: Provisioners execute scripts during resource creation. Types: file, local-exec, remote-exec. Use as last resort.
+
+Q7: What is state locking?
+
+A: State locking prevents concurrent operations. Prevents corruption in team environments. Use DynamoDB with S3.
+
+Q8: Count vs for_each?
+
+A: Count creates by index. For_each creates by key. For_each is more stable when removing resources.
+
+Q9: How to manage secrets?
+
+A: Use environment variables, AWS Secrets Manager, HashiCorp Vault. Never commit secrets to Git.
+
+Q10: What is Terragrunt?
+
+A: Terraform wrapper that helps keep code DRY, manages remote state, and handles multiple environments.
