@@ -9,3 +9,9 @@ terraform state pull
 terraform state push
 terraform state rm aws_instance.web
 terraform state mv aws_instance.web aws_instance.new
+
+Terraform Resource Syntax
+resource "provider_resource_type" "local_name" {
+  argument1 = value1
+  argument2 = value2
+}
