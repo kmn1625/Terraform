@@ -1,0 +1,12 @@
+Drift occurs when the actual infrastructure state differs from the Terraform state file due to manual changes.
+
+Detecting Drift:
+terraform plan
+terraform refresh
+terraform plan -refresh-only
+Fixing Drift:
+# Revert to Terraform config
+terraform apply
+
+# Or update Terraform to match reality
+terraform refresh
